@@ -172,8 +172,9 @@ function work_out_last_date(day){
 	var now = new Date();
 	now.setDate(now.getDate()-diff);
 	var searchdate = new Array(2);
-	searchdate[0] = months[now.getMonth()]+""+now.getDate();
+	searchdate[0] = months[now.getMonth()];
 	searchdate[1] = now.getFullYear();
+	searchdate[2] = now.getDate();
 	return searchdate;
 }
 
@@ -230,7 +231,7 @@ function selectday(day)
 	//checking if aired, work out last date 'day' was from today, send over that date and curl it and ouput it.
 	var datearr = work_out_last_date(day);
 	
-	var air_date = datearr[0]+","+datearr[1];
+	var air_date = datearr[0]+datearr[2]+","+datearr[1];
 	//alert(air_date);
 	//send datearr[0] and [1] to alledits.php use that date to curl all shows form returned query - if date equals last queried date dont query
 	
@@ -249,7 +250,7 @@ function selectday(day)
     document.getElementById("myinfo").innerHTML=xmlhttp.responseText;
     }
   }
-xmlhttp.open("GET","alledits.php?downloadday="+day+"&day=runday&air_date="+air_date,true);
+xmlhttp.open("GET","alledits.php?downloadday="+day+"&day=runday&air_date="+air_date+"&smonth="+datearr[0]+"&sday="+datearr[2]+"&syear="+datearr[1],true);
 xmlhttp.send();
 
 }

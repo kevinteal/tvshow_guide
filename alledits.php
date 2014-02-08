@@ -9,8 +9,14 @@ $con = mysql_connect("localhost", "root", "")
 
 if(isset($_GET["air_date"])){
 $air_date = $_GET["air_date"];
+$smonth = $_GET["smonth"];
+$sday = $_GET["sday"];
+$syear = $_GET["syear"];
 }else{
 	$air_date = "unavailable";
+	$smonth = "unavailable";
+	$sday = "unavailable";
+	$syear = "unavailable";
 }
 
 if(isset($_SESSION['route']))
@@ -269,13 +275,22 @@ if($db_air_date != $air_date){
 	curl_close($curl_handle);
 	
 	$output = preg_replace("/&#?[a-z0-9]+;/i","",$output);
+	$spaced_date = $smonth." ".$sday.", ".$syear;
 	
 	if (strpos($output,$air_date) !== false) {
 		//echo 'true';
 		$db_air_date = "Aired";
 		mysql_query("UPDATE myshowkev SET last_airdate='$air_date', episode_num  = episode_num + 1 WHERE showid = '$showid'");
 		$ep_no++;
+	}elseif (strpos($output,$spaced_date) !== false) {
+		//echo 'true';
+		$db_air_date = "Aired";
+		mysql_query("UPDATE myshowkev SET last_airdate='$air_date', episode_num  = episode_num + 1 WHERE showid = '$showid'");
+		$ep_no++;
 	}
+	
+	
+	
 }else{
 	$db_air_date = "Aired";
 }
