@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 07, 2014 at 09:32 PM
+-- Generation Time: Feb 08, 2014 at 10:54 AM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -18,6 +18,30 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `tvshows`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mydaykev`
+--
+
+CREATE TABLE IF NOT EXISTS `mydaykev` (
+  `mydayname` varchar(10) NOT NULL,
+  PRIMARY KEY (`mydayname`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `mydaykev`
+--
+
+INSERT INTO `mydaykev` (`mydayname`) VALUES
+('Friday'),
+('Monday'),
+('Saturday'),
+('Sunday'),
+('Thursday'),
+('Tuesday'),
+('Wednesday');
 
 -- --------------------------------------------------------
 
