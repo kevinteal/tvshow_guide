@@ -257,12 +257,14 @@ $season_no = $row['season_num'];
 $ep_no = $row['episode_num'];
 $list_link = $row['list_link'];
 
+$snx=$season_no;
+$enx=$ep_no;
 
 if ($season_no < 10){
-$season_no = "0".$season_no;
+$snx = "0".$season_no;
 }
 if($ep_no < 10){
-	$ep_no = "0".$ep_no;
+	$enx = "0".$ep_no;
 }
 
 if($db_air_date != $air_date){
@@ -300,7 +302,7 @@ $newphrase = str_replace($spaces, $plussign, $show);
 	     
   echo "<tr id=$showid onmouseover=\"style.backgroundColor='#99ccff'\" onmouseout=\"style.backgroundColor='#6699cc'\">";
   echo "<td><input type='text' id='updname$x' name=$show value=\"$show\" onblur='updateshow($showid,this.value)' $disabled/></td>"; 
-  echo "<td><a target='_blank' href=https://www.google.co.uk/search?q=" . $newphrase . "+s".$season_no."e".$ep_no."+720p+torrent&ie=UTF-8&safe=off&tbs=qdr:w>".$row['showname']."</a></td>";
+  echo "<td><a target='_blank' href=https://www.google.co.uk/search?q=" . $newphrase . "+s".$snx."e".$enx."+720p+torrent&ie=UTF-8&safe=off&tbs=qdr:w>".$row['showname']."</a></td>";
   echo "<td>
   <select id='updateday$x' onchange='updateday(this.value,$showid)' $disabled>
   <option value=$airday>$airday</option>
