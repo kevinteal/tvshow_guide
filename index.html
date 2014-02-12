@@ -473,6 +473,21 @@ else
 }
 
 
+function updateiframe(url){
+	console.log(url);
+	var iframe = document.getElementById("iframe_url");
+	document.getElementById("frame_close").style.display="block";
+	iframe.src=url;
+	iframe.style.display="block";
+	
+	
+}
+function close_frame(){
+	
+	document.getElementById("iframe_url").style.display="none";
+	document.getElementById("frame_close").style.display="none";
+	}
+
 
 </script>
 
@@ -497,6 +512,18 @@ th,td{padding:5px;}
 		left: .2em;
 		top: 50%;
 		margin-top: -8px;
+	}
+	#iframe_url{
+		display:none;
+	}
+	#frame_close{
+		display:none;
+		width:50px;
+	}
+	#frame_close:hover{
+		background-color:#DD006F;
+		border-color:#DD006F;
+		color:white;
 	}
 label, input { display:block; }
     input.text { margin-bottom:12px; width:95%; padding: .4em; }
@@ -576,8 +603,12 @@ Tv Show:<input type="text" name="myshow" onKeyUp="showHint(this.value)" placehol
 </div>
 
 
+</div><div class="grid_16">
+<button id="frame_close" onClick="close_frame()">X</button>
+<iframe id="iframe_url" src="" width="900" height="400" ></iframe>
 </div>
 </div>
+
 </body>
 </html> 
 

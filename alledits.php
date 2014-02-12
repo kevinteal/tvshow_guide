@@ -237,6 +237,7 @@ echo "<table cellpadding='10'>
 <th>Search Torrent</th>
 <th>Air Day</th>
 <th>Wiki</th>
+<th>iframe</th>
 <th>Last Air Date</th>
 <th>Remove</th>
 </tr>";
@@ -315,6 +316,8 @@ $newphrase = str_replace($spaces, $plussign, $show);
   <option value='Saturday'>Saturday</option>
   </select></td>";
   echo "<td><a target='_blank' href=".$list_link.">info</a></td>";
+  $g= json_encode($list_link);
+   echo "<td><a href='#' onclick='updateiframe($g)' >iframed</a></td>";
   echo "<td>".$db_air_date."</td>";
   echo "<td><input type='checkbox' id='chk$x' $disabled></td>";
   echo "</tr>";
