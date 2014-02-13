@@ -226,7 +226,7 @@ function selectday(day)
 		day=getdayname(theday2,1);
 	  
   }
-	document.getElementById("myinfo").innerHTML="<center><img src='ajax-loader.gif' height='100' width='100' /></center>";
+	document.getElementById("myinfo").innerHTML="<center><img src='300.gif' height='33' width='220' /></center>";
 	xmlhttp.onreadystatechange=function()
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
