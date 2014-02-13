@@ -7,7 +7,7 @@ $con = mysql_connect("localhost", "root", "")
 
 //get the q parameter from URL
 $q=$_GET["q"];	
-
+$hint="";
 $sql="SELECT * FROM myshowkev";
 $result = mysql_query($sql);
 $a=array();
@@ -25,23 +25,18 @@ if (strlen($q) > 0)
   $hint="";
   for($i=0; $i<count($a); $i++)
     {
+		
     if (strtolower($q)==strtolower(substr($a[$i],0,strlen($q))))
       {
-      if ($hint=="")
-        {
+      
+       
 		
-		$hint="<a href='#' onclick=findshow(this.text)>$a[$i]</a>";
-		
-        }
-      else
-        {
-		
-        $hint=$hint." <br/> <a href='#' onclick=findshow(this.text)>$a[$i]</a>";
+        $hint=$hint."<li><a href='#' onclick=findshow(this.text)>$a[$i]</a></li>";
 		
         }
       }
     }
-  }
+  
 
 // Set output to "no suggestion" if no hint were found
 // or to the correct values
@@ -51,7 +46,7 @@ if ($hint == "")
   }
 else
   {
-  $response=$hint;
+  $response="<ul>".$hint."</ul>";
   }
 
 //output the response
