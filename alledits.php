@@ -280,12 +280,16 @@ if($db_air_date != $air_date){
 	$output = preg_replace("/&#?[a-z0-9]+;/i","",$output);
 	$spaced_date = $smonth." ".$sday.", ".$syear;
 	
-	if (strpos($output,$air_date) !== false) {
+	$air_date=$air_date;
+	$spaced_date=$spaced_date;
+	
+	
+	if (strpos($output,'<td>'.$air_date) !== false) {
 		//echo 'true';
 		$db_air_date = "Aired";
 		mysql_query("UPDATE myshowkev SET last_airdate='$air_date', episode_num  = episode_num + 1 WHERE showid = '$showid'");
 		$ep_no++;
-	}elseif (strpos($output,$spaced_date) !== false) {
+	}elseif (strpos($output,'<td>'.$spaced_date) !== false) {
 		//echo 'true';
 		$db_air_date = "Aired";
 		mysql_query("UPDATE myshowkev SET last_airdate='$air_date', episode_num  = episode_num + 1 WHERE showid = '$showid'");
