@@ -258,15 +258,7 @@ $season_no = $row['season_num'];
 $ep_no = $row['episode_num'];
 $list_link = $row['list_link'];
 
-$snx=$season_no;
-$enx=$ep_no;
 
-if ($season_no < 10){
-$snx = "0".$season_no;
-}
-if($ep_no < 10){
-	$enx = "0".$ep_no;
-}
 
 if($db_air_date != $air_date){
 	//$db_air_date = "searching";
@@ -300,6 +292,16 @@ if($db_air_date != $air_date){
 	
 }else{
 	$db_air_date = "Aired";
+}
+
+$snx=$season_no;
+$enx=$ep_no;
+
+if ($season_no < 10){
+$snx = "0".$season_no;
+}
+if($ep_no < 10){
+	$enx = "0".$ep_no;
 }
 
 
