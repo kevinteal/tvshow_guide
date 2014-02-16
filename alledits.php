@@ -380,12 +380,12 @@ echo "</table>";
 
 if($loggedin=="true")
 {
-	echo "<input id='pwd' type='password' placeholder='admin login' disabled/><input type='button'id='loginlogout' value='Logout' onclick='adminlogout($x)'/>";
+	echo "<input id='pwd' type='password' onkeypress='press_enter(event,$x)' placeholder='admin login' disabled/><input type='button'id='loginlogout'  value='Logout' onclick='adminlogout($x)'/>";
 	
 }
 elseif ($loggedin=="false")
 {
-	echo "<input id='pwd' type='password' placeholder='admin login'/><input id='loginlogout' type='button' value='Login' onclick='adminlogin($x)'/>";
+	echo "<input id='pwd' type='password' onkeypress='press_enter(event,$x)' placeholder='admin login'/><input id='loginlogout' type='button'  value='Login' onclick='adminlogin($x)'/>";
 }
 
 

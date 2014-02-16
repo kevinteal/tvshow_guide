@@ -471,5 +471,13 @@ function close_frame(){
 	document.getElementById("iframe_url").style.display="none";
 	document.getElementById("frame_close").style.display="none";
 	}
+	
+	function press_enter(e,x){
+		var keycode = (event.keyCode ? event.keyCode : event.which);
+	if(keycode == '13'){
+		adminlogin(x);	
+	}
+	}
+	
 
 // JavaScript Document
