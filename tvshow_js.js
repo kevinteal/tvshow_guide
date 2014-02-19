@@ -458,7 +458,8 @@ else
 
 
 function updateiframe(url){
-	console.log(url);
+	console.log(decodeURIComponent(url));
+	url=decodeURIComponent(url);
 	var iframe = document.getElementById("iframe_url");
 	document.getElementById("frame_close").style.display="block";
 	iframe.src=url;

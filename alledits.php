@@ -322,7 +322,8 @@ $newphrase = str_replace($spaces, $plussign, $show);
   <option value='Saturday'>Saturday</option>
   </select></td>";
   echo "<td><a target='_blank' href=".$list_link.">info</a></td>";
-  $g= json_encode($list_link);
+  $g=urlencode($list_link);
+  $g=json_encode($g);
    echo "<td><a href='#' onclick='updateiframe($g)' >iframed</a></td>";
   echo "<td>".$db_air_date."</td>";
   echo "<td><input type='checkbox' id='chk$x' $disabled></td>";
