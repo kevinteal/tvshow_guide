@@ -152,6 +152,41 @@ if(isset($_GET["updateshow"]))
 	^^End of Update section^^
 **/
 
+
+
+
+/**
+    **start of full edit update
+**/
+
+if(isset($_GET["update_full_edit"])){
+	
+	
+	$e_id = $_GET["showid"];
+	$e_name = $_GET["e_name"];
+	$e_url = $_GET["e_link_list"];
+	$e_ep_no = $_GET["e_ep_no"];
+	$e_season_no = $_GET["e_season_no"];
+	$e_last_air = $_GET["e_last_air"];
+	$e_air_day = $_GET["e_air_date"];
+	
+	$e_name = mysql_real_escape_string($e_name);
+	$e_url = mysql_real_escape_string($e_url);
+	$e_last_air = mysql_real_escape_string($e_last_air);
+	
+	
+	mysql_query("UPDATE myshowkev SET mydayname='$e_air_day', showname='$e_name', season_num='$e_season_no', episode_num='$e_ep_no', last_airdate='$e_last_air', list_link='$e_url' WHERE showid = '$e_id'");	
+	$sql="SELECT * FROM myshowkev WHERE mydayname = '".$e_air_day."'";
+	$refreshdata = mysql_query($sql);
+	
+}
+
+/**
+    **EDd of full edit update
+**/
+
+
+
 /**
 	**Start of Update Day section**
 **/
@@ -239,6 +274,7 @@ echo "<table cellpadding='10'>
 <th>Wiki</th>
 <th>iframe</th>
 <th>Last Air Date</th>
+<th>Edit</th>
 <th>Remove</th>
 </tr>";
 $x=0;
@@ -257,7 +293,8 @@ $db_air_date = $row['last_airdate'];
 $season_no = $row['season_num'];
 $ep_no = $row['episode_num'];
 $list_link = $row['list_link'];
-
+$db_air_date=stripslashes($db_air_date);
+$list_link=stripslashes($list_link);
 
 
 if($db_air_date != $air_date){
@@ -326,11 +363,12 @@ $newphrase = str_replace($spaces, $plussign, $show);
   $g=json_encode($g);
    echo "<td><a href='#' onclick='updateiframe($g)' >iframed</a></td>";
   echo "<td>".$db_air_date."</td>";
-  echo "<td><input type='checkbox' id='chk$x' $disabled></td>";
+   echo "<td><button type='button' id='es$x' onclick='edit_this_show($showid,\"$newphrase\",$g,$ep_no,$season_no,\"$db_air_date\",\"$airday\")' $disabled >Edit</button></td>";
+  echo "<td><input type='checkbox' id='chk$x' $disabled /></td>";
   echo "</tr>";
   $x++;
   }
-  
+  //$showid,'$newphrase',$g,'$ep_no','$season_no','$db_air_date','$airday'
   echo "<tr>";
   echo "<td></td>";
   echo "<td></td>";

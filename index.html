@@ -88,6 +88,49 @@ Tv Show:<input type="text" name="myshow" onKeyUp="showHint(this.value)" placehol
 </div>
 
 
+
+<div id="edit_show_form">
+<form>
+  <fieldset>
+  
+   <input type="hidden" name="e_id" id="e_id" value="">
+  
+    <label for="e_name">Name</label>
+    <input type="text" name="e_name" id="e_name" autocomplete="on" class="text ui-widget-content ui-corner-all">
+    
+    <label for="e_ep_url">Episode URL</label>
+    <input type="url" name="e_ep_url" id="e_ep_url" value="" class="text ui-widget-content ui-corner-all">
+    
+    <label for="e_season_number">Current Season Number</label>
+    <input type="number" name="e_season_number" id="e_season_number" value="" class="text ui-widget-content ui-corner-all">
+    
+    <label for="e_episode_number">Current Episode Number</label>
+    <input type="number" name="e_episode_number" id="e_episode_number" value="" class="text ui-widget-content ui-corner-all">
+    
+    <label for="e_last_airdate">Last Airdate</label>
+    <input type="text" name="e_last_airdate" id="e_last_airdate" value="" class="text ui-widget-content ui-corner-all">
+    
+    <label for="e_days">Air Day</label>
+    <select name="days" id="e_days">
+    <option value="Sunday">Sunday</option>
+    <option value="Monday">Monday</option>
+    <option value="Tuesday">Tuesday</option>
+    <option value="Wednesday">Wednesday</option>
+    <option value="Thursday">Thursday</option>
+    <option value="Friday">Friday</option>
+    <option value="Saturday">Saturday</option>
+</select>
+    
+  </fieldset>
+  </form>
+</div>
+
+
+
+
+
+
+
 </div><div class="grid_16">
 <button id="frame_close" onClick="close_frame()">X</button>
 <iframe id="iframe_url" src=""  ></iframe>

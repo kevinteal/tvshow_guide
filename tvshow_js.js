@@ -53,6 +53,66 @@ window.onload=function()
 			}}]
     });
 	
+	
+	
+	$( "#edit_show_form" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "clip",
+        duration: 1000
+      },
+      hide: {
+        effect: "clip",
+        duration: 1000
+      },
+	  modal:true,
+	 title: "Edit Tv Show",
+	 minWidth: 400,
+	 minHeight: 400,
+	 close: function( event, ui ) {
+		 $("#e_name").css("border-color", "rgb(204,204,204)");
+		 $("#e_ep_url").css("border-color", "rgb(204,204,204)");
+		  $("#e_episode_number").css("border-color", "rgb(204,204,204)");
+		 $("#e_season_number").css("border-color", "rgb(204,204,204)");
+		 },
+	  buttons: [ { text: "Edit", 
+	  		click: function() { 
+			
+				var id = $("#e_id").val();
+				var name = $("#e_name").val();
+				var link_list = $("#e_ep_url").val();
+				var ep_no = $("#e_episode_number").val();
+				var season_no = $("#e_season_number").val();
+				var last_air = $("#e_last_airdate").val();
+				var air_date = $("#e_days").val();
+				
+				if(name === "" || link_list === "" || ep_no === "" || season_no === ""){
+					$('#edit_show_form').parent().effect("shake", {times: 4}, 1100);
+					if(name ===""){
+						$("#e_name").css("border-color","red");
+					}
+					if(link_list ===""){
+						$("#e_ep_url").css("border-color","red");
+					}
+					if(ep_no ===""){
+						$("#e_episode_number").css("border-color","red");
+					}
+					if(season_no ===""){
+						$("#e_season_number").css("border-color","red");
+					}
+				}else{
+					$( this ).dialog( "close" ); 
+					edit_show_update(id,name,link_list,ep_no,season_no,last_air,air_date);
+				}
+				
+			}}]
+    });
+	
+	
+	
+	
+	
+	
 		check_if_logged_in();
 	/*
 	start on initial load, then when selecting day from list, run check against the selected day
@@ -347,6 +407,7 @@ function adminright(x,ans)
 		document.getElementById("updname"+i).disabled=mybool;
 		document.getElementById("updateday"+i).disabled=mybool;
 		document.getElementById("chk"+i).disabled=mybool;
+		document.getElementById("es"+i).disabled=mybool;
 	}
 	document.getElementById("btnremove").disabled=mybool;
 	document.getElementById("newshow").disabled=mybool;
@@ -480,5 +541,39 @@ function close_frame(){
 	}
 	}
 	
+function edit_this_show(id,name,link_list,ep_no,season_no,last_air,air_date){
+	link_list=decodeURIComponent(link_list);
+	//alert("id:"+id+" \n name:"+name+"\n url:"+link_list+" \n ep no:"+ep_no+" \n season no:"+season_no+" \n last air "+last_air+"air day:"+air_date);
+	
+	name = name.replace(/[.]/g," ");
+	$("#e_id").val(id);
+	$("#e_name").val(name);
+	$("#e_ep_url").val(link_list);
+	$("#e_episode_number").val(ep_no);
+	$("#e_season_number").val(season_no);
+	$("#e_last_airdate").val(last_air);
+	$("#e_days").val(air_date);
+	
+
+	$( "#edit_show_form" ).dialog( "open" );
+}
+
+function edit_show_update(id,name,link_list,ep_no,season_no,last_air,air_date){
+	$("#e_name").css("border-color", "rgb(204,204,204)");
+	$("#e_ep_url").css("border-color", "rgb(204,204,204)");
+	$("#e_episode_number").css("border-color", "rgb(204,204,204)");
+	$("#e_season_number").css("border-color", "rgb(204,204,204)");
+	
+	name=encodeURIComponent(name);
+	link_list=encodeURIComponent(link_list);
+	last_air=encodeURIComponent(last_air);
+	
+	 $.ajax({url:"alledits.php?showid="+id+"&e_name="+name+"&e_link_list="+link_list+"&e_ep_no="+ep_no+"&e_season_no="+season_no+"&e_last_air="+last_air+"&e_air_date="+air_date+"&update_full_edit=runfullupdate",success:function(result){
+      $("#myinfo").html(result);
+    }});
+	
+
+	//alert("id:"+id+" \n name:"+name+"\n url:"+link_list+" \n ep no:"+ep_no+" \n season no:"+season_no+" \n last air "+last_air+"air day:"+air_date);
+}
 
 // JavaScript Document
