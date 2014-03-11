@@ -10,6 +10,9 @@ background-size: 100%;
 .mylineheight2{height:20px}
 #subheading{color:#FFF;}
 th,td{padding:5px;}
+tr:hover{
+	background-color:#FF8040;
+	}
 #dialog-link {
 		width:100px;
 		height:20px;
@@ -72,3 +75,15 @@ button:focus{
 	-webkit-box-shadow: 0px 0px 2px 2px #FF0;
   box-shadow:  0px 0px 2px 2px #FF0;
 }
+
+@media screen and (max-width:1150px){
+	
+body{
+	background:url(background/skulls/skulls.png);
+}
+#subheading{color:#000;}
+a{color:#36C;}
+
+}
+
+	

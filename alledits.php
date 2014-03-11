@@ -344,7 +344,7 @@ if($ep_no < 10){
 
 $newphrase = str_replace($spaces, $plussign, $show);
 	     
-  echo "<tr id=$showid onmouseover=\"style.backgroundColor='#99ccff'\" onmouseout=\"style.backgroundColor='#6699cc'\">";
+  echo "<tr id=$showid >";
   echo "<td><input type='text' id='updname$x' name=$show value=\"$show\" onblur='updateshow($showid,this.value)' $disabled/></td>"; 
   echo "<td><a target='_blank' href=https://www.google.co.uk/search?q=" . $newphrase . "+s".$snx."e".$enx."+720p+torrent&ie=UTF-8&safe=off&tbs=qdr:w>".$row['showname']."</a></td>";
   echo "<td>
