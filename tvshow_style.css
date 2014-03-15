@@ -75,6 +75,23 @@ button:focus{
 	-webkit-box-shadow: 0px 0px 2px 2px #FF0;
   box-shadow:  0px 0px 2px 2px #FF0;
 }
+#daypick{
+	float:left;
+	width:100%;
+}
+.daybox{
+	position:relative;
+	top:0px;
+	left:0px;
+	float:left;
+	width:0px;
+	height:20px;
+	color:white;
+	
+}
+.dark{
+	opacity:1;
+}
 
 @media screen and (max-width:1150px){
 	

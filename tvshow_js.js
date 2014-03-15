@@ -1,6 +1,9 @@
 
+var icounter=0;
+
 window.onload=function()
 {
+	 	
 	var d = new Date();
 	var theday=d.getDay();
 	var dlday=getdayname(theday,1);
@@ -8,6 +11,19 @@ window.onload=function()
 	document.getElementById("tdv").value=dlday;
     document.getElementById("subheading").innerHTML="Download lineup from: "+dlday;
 	selectday(dlday);
+	
+	
+	for (icounter; icounter<=2; icounter++){
+		var x = (icounter + 1) * 150;
+      $('<span>', {id:"day"+icounter } ).appendTo("#daypick");
+	  $("#day"+icounter).addClass("daybox");
+	  $("#day"+icounter).css("left",x);
+	}
+
+	$(".daybox:nth-child(2)").html("<span class='dark'>"+dlday+"</span>");
+	$(".daybox:nth-child(1)").html("<span class='dark'>"+getnextday(dlday,-1)+"</span>");
+	$(".daybox:nth-child(3)").html("<span class='dark'>"+getnextday(dlday,1)+"</span>");
+	
 	
 	
 	 $( "#mydia" ).dialog({
@@ -574,6 +590,132 @@ function edit_show_update(id,name,link_list,ep_no,season_no,last_air,air_date){
 	
 
 	//alert("id:"+id+" \n name:"+name+"\n url:"+link_list+" \n ep no:"+ep_no+" \n season no:"+season_no+" \n last air "+last_air+"air day:"+air_date);
+}
+
+function getnextday(currday,direction){
+	day=0;
+switch(currday)
+	{
+		case "Sunday":
+		  day="0";
+		  break;
+		case "Monday":
+		  day="1";
+		  break;
+		  case "Tuesday":
+		  day="2";
+		  break;
+		case "Wednesday":
+		  day="3";
+		  break;
+		  case "Thursday":
+		 day="4";
+		  break;
+		case "Friday":
+		  day="5";
+		  break;
+		  case "Saturday":
+		  day="6";
+		  break;
+		default:
+		  date="Can't Find day";
+	}
+	
+	day=parseInt(day);
+	direction=parseInt(direction);
+	day=day+direction;
+	
+	if (day==-1){
+		day=6;
+	}
+	if(day==7){
+		day=0;
+	}
+	
+	switch(day)
+	{
+		case 0:
+		  day="Sunday";
+		  break;
+		case 1:
+		  day="Monday";
+		  break;
+		  case 2:
+		  day="Tuesday";
+		  break;
+		case 3:
+		  day="Wednesday";
+		  break;
+		  case 4:
+		 day="Thursday";
+		  break;
+		case 5:
+		  day="Friday";
+		  break;
+		  case 6:
+		  day="Saturday";
+		  break;
+		default:
+		  date="Can't Find day";
+	}
+	
+	return day;
+}
+
+function movearr(direction){
+	if (direction=="left"){
+		
+		$( ".daybox:first" ).animate({
+			opacity: 0,
+			left: "-=150",
+			height: "0px",
+			width:"0px"
+		  }, 400, function() {
+			$(".daybox:first").remove();
+			$('<div>', {id:"day"+icounter } ).appendTo("#daypick");
+	  	$("#day"+icounter).addClass("daybox");
+		icounter++;
+		  });
+		  
+		
+		
+		
+		
+	}else if (direction =="right"){
+		
+		
+		
+		$( ".dark:last" ).animate({
+			opacity:0
+		},400);
+		
+		
+		$( ".daybox:last" ).animate({
+			left: "+=150",
+		  }, 400, function() {
+			$(".daybox:last").remove();
+			 $('<span>', {id:"day"+icounter } ).prependTo("#daypick");
+	  	$("#day"+icounter).addClass("daybox");
+		$("#day"+icounter).html("<span class='dark'>sunday"+icounter+"</span>");
+		$("#day"+icounter).css("opacity",0);
+		$("#day"+icounter).animate({
+			left:"+=150",
+			opacity:1
+		},400);
+		icounter++;
+		
+		  });
+		  
+		  $(".daybox:nth-child(2)").delay(200).animate({
+			left:"+=150"
+		},300);
+		$(".daybox:nth-child(1)").delay(200).animate({
+			left:"+=150"
+		},300);
+		
+		
+		
+	}
 }
 
 // JavaScript Document
