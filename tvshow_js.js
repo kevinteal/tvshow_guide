@@ -23,7 +23,14 @@ window.onload=function()
 	$(".daybox:nth-child(2)").html("<span class='dark'>"+dlday+"</span>");
 	$(".daybox:nth-child(1)").html("<span class='dark'>"+getnextday(dlday,-1)+"</span>");
 	$(".daybox:nth-child(3)").html("<span class='dark'>"+getnextday(dlday,1)+"</span>");
+
+	$(".daybox:nth-child(2)").css({
+		fontSize:"18px"
+	}
+		);
+
 	
+
 	
 	
 	 $( "#mydia" ).dialog({
@@ -594,6 +601,7 @@ function edit_show_update(id,name,link_list,ep_no,season_no,last_air,air_date){
 
 function getnextday(currday,direction){
 	day=0;
+
 switch(currday)
 	{
 		case "Sunday":
@@ -663,20 +671,57 @@ switch(currday)
 }
 
 function movearr(direction){
+
+		
+	$("#arrow1").attr("disabled",true);
+	$("#arrow2").attr("disabled",true);
+	
 	if (direction=="left"){
 		
+		$( ".dark:first" ).animate({
+			opacity:0
+		},400);
+		
+		
 		$( ".daybox:first" ).animate({
-			opacity: 0,
 			left: "-=150",
-			height: "0px",
-			width:"0px"
 		  }, 400, function() {
 			$(".daybox:first").remove();
-			$('<div>', {id:"day"+icounter } ).appendTo("#daypick");
+			
+			
+		$('<div>', {id:"day"+icounter } ).appendTo("#daypick");
 	  	$("#day"+icounter).addClass("daybox");
+		var text = $(".daybox:nth-child(2)").html();
+		text = text.replace(/<(?:.|\n)*?>/gm, '');
+		
+		text = getnextday(text,1);
+		$("#day"+icounter).html("<span class='dark'>"+text+"</span>");
+		$("#day"+icounter).css({
+			opacity:0,
+			left:600
+			});
+		$("#day"+icounter).animate({
+			left:"-=150",
+			opacity:1
+		},400, function(){
+			$("#arrow1").attr("disabled",false);
+			$("#arrow2").attr("disabled",false);
+			var text = $(".daybox:nth-child(2)").html();
+			text = text.replace(/<(?:.|\n)*?>/gm, '');
+			selectday(text);
+		});
 		icounter++;
+		
 		  });
 		  
+		  $(".daybox:nth-child(2)").delay(200).animate({
+			left:"-=150",
+			fontSize:14
+		},300);
+		$(".daybox:nth-child(3)").delay(200).animate({
+			left:"-=150",
+			fontSize:18
+		},300);
 		
 		
 		
@@ -694,28 +739,46 @@ function movearr(direction){
 			left: "+=150",
 		  }, 400, function() {
 			$(".daybox:last").remove();
-			 $('<span>', {id:"day"+icounter } ).prependTo("#daypick");
+			 $('<div>', {id:"day"+icounter } ).prependTo("#daypick");
+			 
+			 
+			 
 	  	$("#day"+icounter).addClass("daybox");
-		$("#day"+icounter).html("<span class='dark'>sunday"+icounter+"</span>");
+		var text = $(".daybox:nth-child(2)").html();
+		text = text.replace(/<(?:.|\n)*?>/gm, '');
+		
+		text = getnextday(text,-1);
+		$("#day"+icounter).html("<span class='dark'>"+text+"</span>");
 		$("#day"+icounter).css("opacity",0);
 		$("#day"+icounter).animate({
 			left:"+=150",
 			opacity:1
-		},400);
+		},400, function(){
+			$("#arrow1").attr("disabled",false);
+			$("#arrow2").attr("disabled",false);
+			
+			var text = $(".daybox:nth-child(2)").html();
+			text = text.replace(/<(?:.|\n)*?>/gm, '');
+			selectday(text);
+			
+		});
 		icounter++;
 		
 		  });
 		  
 		  $(".daybox:nth-child(2)").delay(200).animate({
-			left:"+=150"
+			left:"+=150",
+			fontSize:14
 		},300);
 		$(".daybox:nth-child(1)").delay(200).animate({
-			left:"+=150"
+			left:"+=150",
+			fontSize:18
 		},300);
 		
 		
 		
 	}
 }
+
 
 // JavaScript Document

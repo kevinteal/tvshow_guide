@@ -78,6 +78,8 @@ button:focus{
 #daypick{
 	float:left;
 	width:100%;
+	margin-bottom:5px;
+
 }
 .daybox{
 	position:relative;
@@ -87,11 +89,20 @@ button:focus{
 	width:0px;
 	height:20px;
 	color:white;
+
+	font-size:14px;
+
 	
 }
 .dark{
 	opacity:1;
 }
+
+#arrows{
+	padding-left:315px;
+	
+}
+
 
 @media screen and (max-width:1150px){
 	
@@ -100,6 +111,10 @@ body{
 }
 #subheading{color:#000;}
 a{color:#36C;}
+
+.daybox{
+	color:blue;
+}
 
 }
 
