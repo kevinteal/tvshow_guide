@@ -10,7 +10,7 @@ window.onload=function()
 	//document.getElementById("heading").innerHTML="Day is: "+getdayname(theday,0);
 	document.getElementById("tdv").value=dlday;
     document.getElementById("subheading").innerHTML="Download lineup from: "+dlday;
-	selectday(dlday);
+	selectday(dlday,false);
 	
 	
 	for (icounter; icounter<=2; icounter++){
@@ -293,8 +293,9 @@ return date;
 
 
 
-function selectday(day)
+function selectday(day,editText)
 {
+	
 	//checking if aired, work out last date 'day' was from today, send over that date and curl it and ouput it.
 	var datearr = work_out_last_date(day);
 	
@@ -314,7 +315,13 @@ function selectday(day)
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
-    document.getElementById("myinfo").innerHTML=xmlhttp.responseText;
+		document.getElementById("myinfo").innerHTML=xmlhttp.responseText;
+		$("#subheading").html("Download lineup from: "+day);
+		if(editText==true){
+			$(".daybox:nth-child(2)").html("<span class='dark'>"+day+"</span>");
+			$(".daybox:nth-child(1)").html("<span class='dark'>"+getnextday(day,-1)+"</span>");
+			$(".daybox:nth-child(3)").html("<span class='dark'>"+getnextday(day,1)+"</span>");
+		}
     }
   }
 xmlhttp.open("GET","alledits.php?downloadday="+day+"&day=runday&air_date="+air_date+"&smonth="+datearr[0]+"&sday="+datearr[2]+"&syear="+datearr[1],true);
@@ -708,7 +715,7 @@ function movearr(direction){
 			$("#arrow2").attr("disabled",false);
 			var text = $(".daybox:nth-child(2)").html();
 			text = text.replace(/<(?:.|\n)*?>/gm, '');
-			selectday(text);
+			selectday(text,false);
 		});
 		icounter++;
 		
@@ -759,7 +766,7 @@ function movearr(direction){
 			
 			var text = $(".daybox:nth-child(2)").html();
 			text = text.replace(/<(?:.|\n)*?>/gm, '');
-			selectday(text);
+			selectday(text,false);
 			
 		});
 		icounter++;
@@ -779,6 +786,20 @@ function movearr(direction){
 		
 	}
 }
+function tvrageapi(option,value){
+	
+	$.ajax({
+	  url: "tvrageapi.php?value="+value+"&option=opt",
+	  cache: false
+	})
+	  .done(function( html ) {
+		$("#resultstv").empty();
+		$("#resultstv").html(html);
+	  });
+	
 
+
+	$("#resultstv").css("display","block");
+}
 
 // JavaScript Document

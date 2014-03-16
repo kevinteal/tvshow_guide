@@ -54,7 +54,7 @@
 <a href='#' id='dialog-link' onclick='open_show_form()' class='ui-state-default ui-corner-all'><span class='ui-icon ui-icon-newwin'></span>Add New Show</a>
 <br/><br/>
 <form>
-Show Lineup from:<select name="users" onChange="selectday(this.value)">
+Show Lineup from:<select name="users" onChange="selectday(this.value,true)">
 <option value="">Select a day:</option>
 <option value="Sunday">Sunday</option>
 <option value="Monday">Monday</option>
@@ -80,7 +80,11 @@ Tv Show:<input type="text" name="myshow" onKeyUp="showHint(this.value)" placehol
 <form>
   <fieldset>
     <label for="name">Name</label>
-    <input type="text" name="name" id="name" autocomplete="on" class="text ui-widget-content ui-corner-all">
+    <input type="text" name="name" id="name" onBlur="tvrageapi('showname',this.value)" autocomplete="on" class="text ui-widget-content ui-corner-all">
+    
+    <div id="resultstv">
+    
+    </div>
     
     <label for="ep_url">Episode URL</label>
     <input type="url" name="ep_url" id="ep_url" value="" class="text ui-widget-content ui-corner-all">

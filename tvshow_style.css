@@ -10,9 +10,17 @@ background-size: 100%;
 .mylineheight2{height:20px}
 #subheading{color:#FFF;}
 th,td{padding:5px;}
-tr:hover{
+tbody:hover{
 	background-color:#FF8040;
 	}
+	tfoot{
+		border-top:#333 1px solid;
+	}
+	thead{
+		border-bottom:#333 1px solid;
+		font: bold italic small-caps 16px verdana,sans-serif;
+	}
+	
 #dialog-link {
 		width:100px;
 		height:20px;
@@ -101,6 +109,16 @@ button:focus{
 #arrows{
 	padding-left:315px;
 	
+}
+
+#resultstv{
+	display:none;
+	width:85%;
+	margin-left:10px;
+	padding:5px;
+	height:80px;
+	border:#333 1px solid;
+	overflow-y:scroll;
 }
 
 

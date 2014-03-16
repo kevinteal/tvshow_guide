@@ -267,6 +267,7 @@ else
 }
 
 echo "<table cellpadding='10'>
+<thead>
 <tr>
 <th>Show Name</th>
 <th>Search Torrent</th>
@@ -276,7 +277,8 @@ echo "<table cellpadding='10'>
 <th>Last Air Date</th>
 <th>Edit</th>
 <th>Remove</th>
-</tr>";
+</tr>
+</thead>";
 $x=0;
 
 
@@ -344,6 +346,7 @@ if($ep_no < 10){
 
 $newphrase = str_replace($spaces, $plussign, $show);
 	     
+  echo "<tbody>";
   echo "<tr id=$showid >";
   echo "<td><input type='text' id='updname$x' name=$show value=\"$show\" onblur='updateshow($showid,this.value)' $disabled/></td>"; 
   echo "<td><a target='_blank' href=https://www.google.co.uk/search?q=" . $newphrase . "+s".$snx."e".$enx."+720p+torrent&ie=UTF-8&safe=off&tbs=qdr:w>".$row['showname']."</a></td>";
@@ -369,6 +372,8 @@ $newphrase = str_replace($spaces, $plussign, $show);
   $x++;
   }
   //$showid,'$newphrase',$g,'$ep_no','$season_no','$db_air_date','$airday'
+  echo "</tbody>";
+  echo "<tfoot>";
   echo "<tr>";
   echo "<td></td>";
   echo "<td></td>";
@@ -377,6 +382,7 @@ $newphrase = str_replace($spaces, $plussign, $show);
   echo "<td></td>";
   echo "<td><input type=button id='btnremove' value='Remove' onclick='if($x>0){show_confirm($x)}' $disabled/></td>";
   echo "</tr>";
+  echo "</tfoot>";
   
   if(isset($airday))
   {
