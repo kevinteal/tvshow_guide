@@ -1,9 +1,9 @@
 
 var icounter=0;
 
+
 window.onload=function()
 {
-	 	
 	var d = new Date();
 	var theday=d.getDay();
 	var dlday=getdayname(theday,1);
@@ -310,7 +310,7 @@ function selectday(day,editText)
 		day=getdayname(theday2,1);
 	  
   }
-	document.getElementById("myinfo").innerHTML="<center><img src='300.gif' height='33' width='220' /></center>";
+	document.getElementById("myinfo").innerHTML="<img src='300.gif' style=\'margin-left:240px;'\ height='33' width='220' /></center>";
 	xmlhttp.onreadystatechange=function()
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
@@ -797,9 +797,8 @@ function tvrageapi(option,value){
 		$("#resultstv").html(html);
 	  });
 	
-
-
 	$("#resultstv").css("display","block");
 }
+
 
 // JavaScript Document

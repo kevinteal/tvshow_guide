@@ -6,6 +6,7 @@ $con = mysql_connect("localhost", "root", "")
 	
 	mysql_select_db("tvshows", $con)
 	or die("Could not find database: " . mysql_error());
+	
 
 if(isset($_GET["air_date"])){
 $air_date = $_GET["air_date"];
