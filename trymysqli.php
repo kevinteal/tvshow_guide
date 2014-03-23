@@ -55,7 +55,7 @@ $statement->free_result();
 $day = "tuesday";
 $sn = 1;
 
-if($stmt = $db -> prepare("SELECT showname,showid FROM myshowkev WHERE season_num=? and mydayname=?")) {
+if($stmt = $db -> prepare("SELECT showid,showname FROM myshowkev WHERE season_num=? and mydayname=?")) {
 
       /* Bind parameters
          s - string, b - blob, i - int, etc */
@@ -65,14 +65,14 @@ if($stmt = $db -> prepare("SELECT showname,showid FROM myshowkev WHERE season_nu
       $stmt -> execute();
 
       /* Bind results */
-      $stmt -> bind_result($result,$id);
+      $stmt -> bind_result($id,$showname);
 
       /* Fetch the value */
      // $stmt -> fetch();
 	
 		
 	  while($stmt->fetch()){
-     	 echo $id .' '. $result .'<br />';
+     	 echo $id .' '. $showname .'<br />';
 	  }
 	  
      
