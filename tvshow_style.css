@@ -120,6 +120,24 @@ button:focus{
 	border:#333 1px solid;
 	overflow-y:scroll;
 }
+#tvrage{
+	height:100px;
+	overflow-x:scroll;
+	width:100%;
+}
+.tvs{
+	float:left;
+	height:100%;
+	display:none;
+	background:#F00;
+}
+.tvep{
+	float:left;
+	width:80px;
+	height:100%;
+	border:solid 1px black;
+}
+
 
 
 @media screen and (max-width:1150px){

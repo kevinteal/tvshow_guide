@@ -714,6 +714,7 @@ function movearr(direction){
 			$("#arrow1").attr("disabled",false);
 			$("#arrow2").attr("disabled",false);
 			var text = $(".daybox:nth-child(2)").html();
+			//remove span tag
 			text = text.replace(/<(?:.|\n)*?>/gm, '');
 			selectday(text,false);
 		});
@@ -765,6 +766,7 @@ function movearr(direction){
 			$("#arrow2").attr("disabled",false);
 			
 			var text = $(".daybox:nth-child(2)").html();
+			//html will inculde the span tag so remove it
 			text = text.replace(/<(?:.|\n)*?>/gm, '');
 			selectday(text,false);
 			
@@ -787,7 +789,6 @@ function movearr(direction){
 	}
 }
 function tvrageapi(option,value){
-	
 	$.ajax({
 	  url: "tvrageapi.php?value="+value+"&option=opt",
 	  cache: false
@@ -798,6 +799,54 @@ function tvrageapi(option,value){
 	  });
 	
 	$("#resultstv").css("display","block");
+}
+
+function tvrageapi_getshowhistory(id){
+	//$("#tvrage").html(id);
+	//count for width of parent
+	var tvcount=1;
+	 $.ajax({
+            type: "GET",
+            url: "tvrageapi_history.php?value="+id,
+            cache: false,
+            dataType: "xml",
+            success: function(xml) {
+				//get each season tag
+                $(xml).find('Season').each(function(){
+					//empty the parent 
+					$("#tvrage").empty();
+					//season no
+                    var season_num = $(this).attr('no')
+					//create new div for season holder
+					$('<div>', {id:"trs"+season_num } ).appendTo("#tvrage");
+					$("#trs"+season_num).addClass('tvs');
+					tvcount=1;
+					//find each ep
+					$(this).find('episode').each(function(){
+												
+						var epnum = $(this).find('epnum').text(),
+						title = $(this).find('title').text();
+						//create new div for ep and add to season 
+						$('<div>', {id:"trse"+epnum} ).appendTo("#trs"+season_num);
+						
+						$("#trse"+epnum).addClass('tvep');
+						$("#trse"+epnum).html(epnum+" - "+title);
+						
+						//calculate width in here
+						
+						tvcount++;
+					});
+                    
+                });
+				tvcount=tvcount*80;
+				
+				//make latest season the visible one
+				//could have div above with all seasons in, onclick take season num and make current season div display none and new display block
+				
+				$(".tvs:last-child").css("display","block");
+				$(".tvs:last-child").css("width",tvcount+"px");
+            }
+        });
 }
 
 

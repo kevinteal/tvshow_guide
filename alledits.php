@@ -277,6 +277,7 @@ echo "<table cellpadding='10'>
 <th>iframe</th>
 <th>Last Air Date</th>
 <th>Edit</th>
+<th>TvRage</th>
 <th>Remove</th>
 </tr>
 </thead>";
@@ -296,6 +297,7 @@ $db_air_date = $row['last_airdate'];
 $season_no = $row['season_num'];
 $ep_no = $row['episode_num'];
 $list_link = $row['list_link'];
+$tvrageapi_id=$row['tvrageapi_id'];
 $db_air_date=stripslashes($db_air_date);
 $list_link=stripslashes($list_link);
 
@@ -368,6 +370,7 @@ $newphrase = str_replace($spaces, $plussign, $show);
    echo "<td><a href='#' onclick='updateiframe($g)' >iframed</a></td>";
   echo "<td>".$db_air_date."</td>";
    echo "<td><button type='button' id='es$x' onclick='edit_this_show($showid,\"$newphrase\",$g,$ep_no,$season_no,\"$db_air_date\",\"$airday\")' $disabled >Edit</button></td>";
+   echo "<td><button type='button' id='tv$x' onclick='tvrageapi_getshowhistory($tvrageapi_id)' >History</button></td>";
   echo "<td><input type='checkbox' id='chk$x' $disabled /></td>";
   echo "</tr>";
   $x++;
