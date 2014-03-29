@@ -804,50 +804,102 @@ function tvrageapi(option,value){
 function tvrageapi_getshowhistory(id){
 	//$("#tvrage").html(id);
 	//count for width of parent
-	var tvcount=1;
+	var tvcount=1,
+	season_count=1;
+	$("#seasonhold").css("display","block");
+	$("#tvrage").css("display","block");
+	$("#history_close").css("display","block");
 	 $.ajax({
             type: "GET",
             url: "tvrageapi_history.php?value="+id,
             cache: false,
             dataType: "xml",
             success: function(xml) {
+				
+				var showname = $(xml).find('name').text();
+				showname=showname.replace(/ /g,"+");
+				//empty the parents 
+					$("#tvrage").empty();
+					$("#season_tab").empty();
 				//get each season tag
                 $(xml).find('Season').each(function(){
-					//empty the parent 
-					$("#tvrage").empty();
+					
 					//season no
                     var season_num = $(this).attr('no')
+					
+					//add to season tab
+					$('<div>', {id:"season_tab"+season_num } ).appendTo("#season_tab");
+					$("#season_tab"+season_num).addClass('season_tab_cell');
+					
+					$("#season_tab"+season_num).on("click", function(){
+						//alert(season_num);
+						$(".tvs").css("display","none");
+						
+						$("#trs"+season_num).css("display","block");
+						
+					});
+					
+					$("#season_tab"+season_num).html("Season "+season_num);
+					season_count++;
+					
+					
 					//create new div for season holder
 					$('<div>', {id:"trs"+season_num } ).appendTo("#tvrage");
 					$("#trs"+season_num).addClass('tvs');
 					tvcount=1;
+					
+					//output season num 01 not 1;
+					var new_season_num = season_num;
+					if(new_season_num<10){
+							new_season_num = "0"+new_season_num;
+						}
+					
 					//find each ep
 					$(this).find('episode').each(function(){
 												
-						var epnum = $(this).find('epnum').text(),
-						title = $(this).find('title').text();
+						var epnum = $(this).find('seasonnum').text(),
+						title = $(this).find('title').text(),
+						img = $(this).find('screencap').text();
 						//create new div for ep and add to season 
-						$('<div>', {id:"trse"+epnum} ).appendTo("#trs"+season_num);
+						$('<div>', {id:"trse"+epnum+"A"+season_num} ).appendTo("#trs"+season_num);
 						
-						$("#trse"+epnum).addClass('tvep');
-						$("#trse"+epnum).html(epnum+" - "+title);
 						
-						//calculate width in here
+						
+						$("#trse"+epnum+"A"+season_num).addClass('tvep');
+						
+						if(title.length>37){
+							title = title.substring(0,37)+"...";
+						}
+						
+						var text_link = "<a target='_blank' href=https://www.google.co.uk/search?q=" + showname + "+s"+new_season_num+"e"+epnum+"+720p+torrent&ie=UTF-8&safe=off>"+epnum+" - "+title+"</a>";
+						
+						//$("#trse"+epnum).html("<div class='titlehold'>"+epnum+" - "+title+"</div><img src='"+img+"' height='100' width='150' />");
+						$("#trse"+epnum+"A"+season_num).html("<div class='titlehold'>"+text_link+"</div><img src='"+img+"' height='100' width='150' />");
+						
+						
 						
 						tvcount++;
 					});
-                    
+					//calculate width in here
+                    tvcount=tvcount*160;
+					//make latest season the visible one
+					//could have div above with all seasons in, onclick take season num and make current season div display none and new display block
+				
+					
+					$("#trs"+season_num).css("width",tvcount+"px");
                 });
-				tvcount=tvcount*80;
 				
-				//make latest season the visible one
-				//could have div above with all seasons in, onclick take season num and make current season div display none and new display block
-				
+				season_count=season_count*100;
+				$("#season_tab").css("width",season_count+"px");
 				$(".tvs:last-child").css("display","block");
-				$(".tvs:last-child").css("width",tvcount+"px");
+				
             }
         });
 }
-
+function close_history(){
+	$("#seasonhold").css("display","none");
+	$("#tvrage").css("display","none");
+	$("#history_close").css("display","none");
+}
 
 // JavaScript Document

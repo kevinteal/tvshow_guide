@@ -42,23 +42,23 @@ tbody:hover{
 		width:100%;
 		height:600px;
 	}
-	#frame_close{
+	#frame_close,#history_close{
 		display:none;
 		width:50px;
-		float:right;
+		float:left;
 	}
-	#frame_close:hover{
+	#frame_close:hover,#history_close:hover{
 		background-color:#DD006F;
 		border-color:#DD006F;
 		color:white;
 	}
-	a{
+	table a{
 		color:#FF0;
 		font-family:Tahoma, Geneva, sans-serif;
 		font-size:18px;
 		text-decoration:none;
 	}
-	a:hover{
+	table a:hover{
 		opacity:.7;
 	}
 	ul{
@@ -120,24 +120,62 @@ button:focus{
 	border:#333 1px solid;
 	overflow-y:scroll;
 }
+
+#season_tab{
+	
+	height:40px;
+}
 #tvrage{
-	height:100px;
+	height:170px;
+}
+#seasonhold, #tvrage{
 	overflow-x:scroll;
 	width:100%;
+	overflow:auto;
+	overflow-y:hidden;
 }
+.season_tab_cell{
+	padding:10px;
+	border:thin solid black;
+	color:white;
+	width:80px;
+	float:left;
+	background:#002D59;
+}
+.season_tab_cell:hover{
+	background:#004080;
+	border:thin white solid;
+	cursor:pointer;
+}
+
 .tvs{
 	float:left;
 	height:100%;
 	display:none;
-	background:#F00;
 }
 .tvep{
+	background:#004080;
+	padding:10px;
 	float:left;
-	width:80px;
+	width:150px;
 	height:100%;
 	border:solid 1px black;
 }
-
+.titlehold{
+	width:100%;
+	height:40px;
+	color:white;
+	font:13px/150% Verdana, Geneva, sans-serif;
+}
+.titlehold a{
+	color:white;
+	font-family:Tahoma, Geneva, sans-serif;
+	font-size:13px;
+	text-decoration:none;
+}
+.titlehold a:hover{
+	opacity:.7;
+}
 
 
 @media screen and (max-width:1150px){
