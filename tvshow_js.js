@@ -29,6 +29,17 @@ window.onload=function()
 	}
 		);
 
+	$("#season_tab").on("mousedown",function(e){
+		console.log("down "+e.pageX);
+		$("#season_tab").on("mousemove",function(e){
+		console.log("moving "+e.pageX);
+		$("#season_tab").on("mouseup",function(e){
+		console.log("up "+e.pageX);
+		$("#season_tab").off("mousemove");
+	});
+	});
+	});
+	
 	
 
 	
@@ -818,6 +829,10 @@ function tvrageapi_getshowhistory(id){
 				
 				var showname = $(xml).find('name').text();
 				showname=showname.replace(/ /g,"+");
+				
+				//generic img if cant find ep img
+				var default_img = $(xml).find('image').text();
+				
 				//empty the parents 
 					$("#tvrage").empty();
 					$("#season_tab").empty();
@@ -859,7 +874,8 @@ function tvrageapi_getshowhistory(id){
 												
 						var epnum = $(this).find('seasonnum').text(),
 						title = $(this).find('title').text(),
-						img = $(this).find('screencap').text();
+						img = $(this).find('screencap').text(),
+						airdate = $(this).find('airdate').text();
 						//create new div for ep and add to season 
 						$('<div>', {id:"trse"+epnum+"A"+season_num} ).appendTo("#trs"+season_num);
 						
@@ -870,11 +886,14 @@ function tvrageapi_getshowhistory(id){
 						if(title.length>37){
 							title = title.substring(0,37)+"...";
 						}
+						if(!img){
+							img = default_img;
+						}
 						
 						var text_link = "<a target='_blank' href=https://www.google.co.uk/search?q=" + showname + "+s"+new_season_num+"e"+epnum+"+720p+torrent&ie=UTF-8&safe=off>"+epnum+" - "+title+"</a>";
 						
 						//$("#trse"+epnum).html("<div class='titlehold'>"+epnum+" - "+title+"</div><img src='"+img+"' height='100' width='150' />");
-						$("#trse"+epnum+"A"+season_num).html("<div class='titlehold'>"+text_link+"</div><img src='"+img+"' height='100' width='150' />");
+						$("#trse"+epnum+"A"+season_num).html("<div class='titlehold'>"+text_link+"</div><img src='"+img+"' height='100' width='150' />\r\r Aired - "+airdate);
 						
 						
 						

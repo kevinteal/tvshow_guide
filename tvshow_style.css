@@ -11,7 +11,7 @@ background-size: 100%;
 #subheading{color:#FFF;}
 th,td{padding:5px;}
 tbody:hover{
-	background-color:#FF8040;
+	background-color:#002D59;
 	}
 	tfoot{
 		border-top:#333 1px solid;
@@ -57,9 +57,10 @@ tbody:hover{
 		font-family:Tahoma, Geneva, sans-serif;
 		font-size:18px;
 		text-decoration:none;
+		opacity:.9;
 	}
 	table a:hover{
-		opacity:.7;
+		opacity:1;
 	}
 	ul{
 	list-style-image:url(retro_tv_icon_sml.png);
@@ -126,7 +127,7 @@ button:focus{
 	height:40px;
 }
 #tvrage{
-	height:170px;
+	height:200px;
 }
 #seasonhold, #tvrage{
 	overflow-x:scroll;
@@ -160,6 +161,7 @@ button:focus{
 	width:150px;
 	height:100%;
 	border:solid 1px black;
+	color:white;
 }
 .titlehold{
 	width:100%;
@@ -184,10 +186,13 @@ body{
 	background:url(background/skulls/skulls.png);
 }
 #subheading{color:#000;}
-a{color:#36C;}
+table a{color:#36C;}
 
 .daybox{
 	color:blue;
+}
+tbody:hover{
+	background:FF8040;
 }
 
 }
