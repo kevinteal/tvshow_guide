@@ -13,6 +13,7 @@ window.onload=function()
 	selectday(dlday,false);
 	
 	
+	
 	for (icounter; icounter<=2; icounter++){
 		var x = (icounter + 1) * 150;
       $('<span>', {id:"day"+icounter } ).appendTo("#daypick");
@@ -28,20 +29,99 @@ window.onload=function()
 		fontSize:"18px"
 	}
 		);
+		
+		$("#seasonhold").drag_plugin({
+			speed:5
+			});
 
+		$("#tvrage").drag_plugin({
+			speed:8
+			});
+/*
 	$("#season_tab").on("mousedown",function(e){
-		console.log("down "+e.pageX);
+		//console.log("down "+e.pageX);
+		var startx = e.pageX;
+						
 		$("#season_tab").on("mousemove",function(e){
 		console.log("moving "+e.pageX);
-		$("#season_tab").on("mouseup",function(e){
-		console.log("up "+e.pageX);
-		$("#season_tab").off("mousemove");
-	});
-	});
+				
+			var newx = startx - e.pageX;	
+			if(newx>0){
+				newx=-5;
+			}else{
+				newx=5;
+			}
+			console.log("new x: "+newx);
+				
+			var scrollx = $("#seasonhold").scrollLeft();
+			$("#seasonhold").scrollLeft(scrollx-newx);			
+		});
 	});
 	
+	$("#season_tab").on("mouseup",function(e){
+			//console.log("up "+e.pageX);
+			$("#season_tab").off("mousemove");
+			});
 	
-
+	$("#season_tab").on("mouseleave",function(e){
+			//console.log("up "+e.pageX);
+			//alert("left");
+			$("#season_tab").off("mousemove");
+			});
+			
+			
+		*/	
+			
+			
+			
+			
+			/*
+			$("#tvrage").on("mousedown",function(e){
+		//console.log("down "+e.pageX);
+		var startx = e.pageX;
+						
+		$("#tvrage").on("mousemove",function(e){
+		//console.log("moving "+e.pageX);
+				
+			var newx = startx - e.pageX;	
+			if(newx>0){
+				newx=-10;
+			}else{
+				newx=10;
+			}
+			//console.log("new x: "+newx);
+				
+			var scrollx = $("#tvrage").scrollLeft();
+			$("#tvrage").scrollLeft(scrollx-newx);			
+		});
+	});
+	
+	$("#tvrage").on("mouseup",function(e){
+			//console.log("up "+e.pageX);
+			$("#tvrage").off("mousemove");
+			});
+	
+	$("#tvrage").on("mouseleave",function(e){
+			//console.log("up "+e.pageX);
+			//alert("left");
+			$("#tvrage").off("mousemove");
+			});
+			
+			
+			*/
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 	
 	
 	 $( "#mydia" ).dialog({
@@ -890,10 +970,12 @@ function tvrageapi_getshowhistory(id){
 							img = default_img;
 						}
 						
-						var text_link = "<a target='_blank' href=https://www.google.co.uk/search?q=" + showname + "+s"+new_season_num+"e"+epnum+"+720p+torrent&ie=UTF-8&safe=off>"+epnum+" - "+title+"</a>";
+						var search_title = title.replace(/ /g,"+");
+						
+						var text_link = "<a target='_blank' href=https://www.google.co.uk/search?q=" + showname + "+s"+new_season_num+"e"+epnum+"+720p+torrent+"+search_title+"&ie=UTF-8&safe=off>"+epnum+" - "+title+"</a>";
 						
 						//$("#trse"+epnum).html("<div class='titlehold'>"+epnum+" - "+title+"</div><img src='"+img+"' height='100' width='150' />");
-						$("#trse"+epnum+"A"+season_num).html("<div class='titlehold'>"+text_link+"</div><img src='"+img+"' height='100' width='150' />\r\r Aired - "+airdate);
+						$("#trse"+epnum+"A"+season_num).html("<div class='titlehold'>"+text_link+"</div><img src='"+img+"' height='100' width='150' draggable='false' />\r\r Aired - "+airdate);
 						
 						
 						

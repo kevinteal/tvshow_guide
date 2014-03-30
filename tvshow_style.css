@@ -123,12 +123,17 @@ button:focus{
 }
 
 #season_tab{
-	
 	height:40px;
+	-webkit-user-select: none; 
+}
+#seasonhold::-webkit-scrollbar {
+    display: none;
 }
 #tvrage{
 	height:200px;
+	-webkit-user-select: none; 
 }
+
 #seasonhold, #tvrage{
 	overflow-x:scroll;
 	width:100%;
