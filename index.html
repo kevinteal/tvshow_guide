@@ -46,16 +46,18 @@
 
 
 
-<div class="grid_13 omega">
+<div class="grid_13 ">
 <p id="myinfo"></p>
 </div>
 
-<p>
-<div class="grid_3 alpha">
-<a href='#' id='dialog-link' onclick='open_show_form()' class='ui-state-default ui-corner-all'><span class='ui-icon ui-icon-newwin'></span>Add New Show</a>
-<br/><br/>
+
+<div class="grid_3" >
+<button type='button' id='dialog-link' class="bigbutton" onclick='open_show_form()' ><span><img src="retro_tv_icon_sml.png" width="30" height="23" /></span>Add New Show</button>
+<!--<a href='#' id='dialog-link' onclick='open_show_form()' class='ui-state-default ui-corner-all'><span class='ui-icon ui-icon-newwin'></span>Add New Show</a>
+-->
+<br/>
 <form>
-Show Lineup from:<select name="users" onChange="selectday(this.value,true)">
+Day:<select name="users" onChange="selectday(this.value,true)">
 <option value="">Select a day:</option>
 <option value="Sunday">Sunday</option>
 <option value="Monday">Monday</option>
@@ -67,11 +69,11 @@ Show Lineup from:<select name="users" onChange="selectday(this.value,true)">
 <option id="tdv" value="error">Today</option>
 </select>
 </form>
-</p>
 
+<br/>
 
 <form name="frm1">
-Tv Show:<input type="text" name="myshow" onKeyUp="showHint(this.value)" placeholder="search for a show..."/>
+Showname:<input type="text" name="myshow" onKeyUp="showHint(this.value)" placeholder="search for a show..."/>
 
 </form>
 <p><span id="txtHint"></span></p>
@@ -106,6 +108,8 @@ Tv Show:<input type="text" name="myshow" onKeyUp="showHint(this.value)" placehol
     <option value="Friday">Friday</option>
     <option value="Saturday">Saturday</option>
 </select>
+
+	<input type="hidden" name="tvrage_id" id="tvrage_id" value="">
     
   </fieldset>
   </form>

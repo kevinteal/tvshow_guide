@@ -12,13 +12,11 @@ $result = file_get_contents($url);
 $xml = new SimpleXMLElement($result);
 
 
-$content = "<ul>";
+$content = "";
 foreach($xml as $tvshow){
-	$content.="<li>".$tvshow->name."</li>";
+	$temp = urlencode($tvshow->name);
+	$content.="<input type='radio' onclick='getshowid($tvshow->showid,\"$temp\")' name='show' value='".$tvshow->showid."'><label>".$tvshow->name."</label>";
 }
-
-
-$content.="</ul>";
 
 echo $content;
 ?>

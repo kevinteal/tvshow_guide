@@ -45,7 +45,7 @@ if(isset($_GET["delete"]))
 	//echo $tvshow;
 	$tvshow = mysql_real_escape_string($tvshow);
 
-
+	
 	
 		$findday="SELECT mydayname from myshowkev WHERE showname ='".$tvshow."'";
 		$day = mysql_query($findday);
@@ -216,13 +216,16 @@ if(isset($_GET["insert"]))
 	$season_no = $_GET["season_no"];
 	$ep_no = $_GET["ep_no"];
 	$ep_url = $_GET["ep_url"];
+	
+	$tvrage_id= $_GET["tvrage_id"];
+	
 	$ep_url = mysql_real_escape_string($ep_url);
 	//rawurldecode($newshow);
 	//echo $newday." ". $newshow;
 	 $newshow = ucwords($newshow);
 	$newshow = mysql_real_escape_string($newshow);
 	
-	mysql_query("INSERT INTO myshowkev (mydayname, showname, season_num, episode_num, last_airdate, list_link) VALUES ('$newday', '$newshow', '$season_no', '$ep_no', 'Unknown', '$ep_url' )");
+	mysql_query("INSERT INTO myshowkev (mydayname, showname, season_num, episode_num, last_airdate, list_link, tvrageapi_id) VALUES ('$newday', '$newshow', '$season_no', '$ep_no', 'Unknown', '$ep_url', '$tvrage_id' )");
 	
 		$day=$newday;
 	
@@ -384,6 +387,9 @@ $newphrase = str_replace($spaces, $plussign, $show);
   echo "<td></td>";
   echo "<td></td>";
   echo "<td></td>";
+  echo "<td></td>";
+  echo "<td></td>";
+   echo "<td></td>";
   echo "<td><input type=button id='btnremove' value='Remove' onclick='if($x>0){show_confirm($x)}' $disabled/></td>";
   echo "</tr>";
   echo "</tfoot>";

@@ -149,8 +149,9 @@ window.onload=function()
 				var season_number = document.getElementById("season_number").value;
 				var episode_number= document.getElementById("episode_number").value;
 				var day = document.getElementById("days").value;
+				var tvrage_id = $("#tvrage_id").val();
 				
-				if(name === "" || ep_url === ""){
+				if(name === "" || ep_url === "" || tvrage_id ===""){
 					$('#mydia').parent().effect("shake", {times: 4}, 1100);
 					if(name ===""){
 						
@@ -161,7 +162,7 @@ window.onload=function()
 					}
 				}else{
 					$( this ).dialog( "close" ); 
-					insertshow(name,ep_url,season_number,episode_number,day);
+					insertshow(name,ep_url,season_number,episode_number,day,tvrage_id);
 				}
 				
 			}}]
@@ -553,7 +554,7 @@ function updateday(day,id)
 }
 
 
-function insertshow(name,ep_url,season_number,episode_number,day)
+function insertshow(name,ep_url,season_number,episode_number,day,tvrage_id)
 {
 //var newday = document.getElementById("selectaday").value;
 //var newshow = document.getElementById("newshow").value;
@@ -569,7 +570,7 @@ $("#ep_url").css("border-color", "rgb(204,204,204)");
 				document.getElementById("myinfo").innerHTML=xmlhttp.responseText;
 				}
 			  }
-			xmlhttp.open("GET","alledits.php?newday="+day+"&season_no="+season_number+"&ep_no="+episode_number+"&ep_url="+encodeURIComponent(ep_url)+"&newshow="+encodeURIComponent(name)+"&insert=setinsert",true);
+			xmlhttp.open("GET","alledits.php?newday="+day+"&season_no="+season_number+"&ep_no="+episode_number+"&ep_url="+encodeURIComponent(ep_url)+"&newshow="+encodeURIComponent(name)+"&tvrage_id="+tvrage_id+"&insert=setinsert",true);
 			xmlhttp.send();
 	
 	
@@ -608,6 +609,7 @@ function show_confirm(numshow)
 		tvi++;
 		}
 	}
+	if(tvi>0){
 	
 var r=confirm("Are you sure you want to delete "+tvarray.toString()+"?");
 if (r==true)
@@ -628,13 +630,16 @@ if (r==true)
 else
   {
   
-  
+  //if repsonse is to not delete then make chk box false
   for(ii=0;ii<tvarray.length;ii++)
 	  {
 	
 		  document.getElementById("chk"+chkarr[ii]).checked=false;
 	  }
   }
+	}else{
+		alert("Please Select a TV show to delete");
+	}
  
 }
 
@@ -929,7 +934,9 @@ function tvrageapi_getshowhistory(id){
 					$("#season_tab"+season_num).on("click", function(){
 						//alert(season_num);
 						$(".tvs").css("display","none");
+						$(".season_tab_cell").css("background","#002D59");
 						
+						$(this).css("background","#4FA7FF");
 						$("#trs"+season_num).css("display","block");
 						
 					});
@@ -993,6 +1000,8 @@ function tvrageapi_getshowhistory(id){
 				season_count=season_count*100;
 				$("#season_tab").css("width",season_count+"px");
 				$(".tvs:last-child").css("display","block");
+				$(".season_tab_cell:last-child").css("background","#4FA7FF");
+				$("#seasonhold").scrollLeft($("#season_tab").width());
 				
             }
         });
@@ -1001,6 +1010,14 @@ function close_history(){
 	$("#seasonhold").css("display","none");
 	$("#tvrage").css("display","none");
 	$("#history_close").css("display","none");
+}
+
+function getshowid(id,name){
+	name = decodeURIComponent(name).replace(/\+/g," ");
+//	alert("id:"+id+" name:"+name);
+	$("#name").val(name);
+	$("#tvrage_id").val(id);
+	
 }
 
 // JavaScript Document
