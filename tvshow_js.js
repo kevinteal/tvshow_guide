@@ -1065,6 +1065,9 @@ function tvrageapi_getshowhistory(id){
 				//set background of latest ep from total days between loop
 				if(!ep_id_div==""){
 				$("#trse"+ep_id_div).css("background","orange");
+				}else{
+					//make last child of tvep orange
+					$(".tvep:last-child").css("background","orange");
 				}
 				
             }
