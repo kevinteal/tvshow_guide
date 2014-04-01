@@ -1,8 +1,39 @@
 
 var icounter=0;
 
-
 window.onload=function()
+{
+	var controls = {
+		page_start:function(){
+			//alert("page");
+			page_init();
+			$('body').css({
+				opacity:'0',
+				
+			});
+			$("#myinfo").css({opacity:0});
+			$('body').animate({
+				opacity:1,
+				
+			},1000,function(){
+				$("#myinfo").animate({opacity:1},300);
+			});
+			
+		},
+		check_page:function(){
+			//alert("checkpa");
+		},
+		check_browser:function(){
+			//alert("bro");
+		}
+	}
+	controls.page_start();
+	controls.check_page();
+	controls.check_browser();
+	
+}
+
+function page_init()
 {
 	var d = new Date();
 	var theday=d.getDay();
@@ -402,7 +433,7 @@ function selectday(day,editText)
 		day=getdayname(theday2,1);
 	  
   }
-	document.getElementById("myinfo").innerHTML="<img src='300.gif' style=\'margin-left:240px;'\ height='33' width='220' /></center>";
+	document.getElementById("myinfo").innerHTML="<img src='300.gif' style=\'margin-left:240px;'\ height='33' width='220' />";
 	xmlhttp.onreadystatechange=function()
   {
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
@@ -901,10 +932,13 @@ function tvrageapi_getshowhistory(id){
 	//$("#tvrage").html(id);
 	//count for width of parent
 	var tvcount=1,
-	season_count=1;
+	season_count=1,
+	ep_id_div="";
 	$("#seasonhold").css("display","block");
 	$("#tvrage").css("display","block");
 	$("#history_close").css("display","block");
+	$("#tvrage").html("<img src='300.gif' style=\'margin-left:240px;'\ height='33' width='220' />");
+	$("#season_tab").html("");
 	 $.ajax({
             type: "GET",
             url: "tvrageapi_history.php?value="+id,
@@ -914,6 +948,7 @@ function tvrageapi_getshowhistory(id){
 				
 				var showname = $(xml).find('name').text();
 				showname=showname.replace(/ /g,"+");
+				var totalSeasons = $(xml).find('totalseasons').text();
 				
 				//generic img if cant find ep img
 				var default_img = $(xml).find('image').text();
@@ -956,8 +991,12 @@ function tvrageapi_getshowhistory(id){
 							new_season_num = "0"+new_season_num;
 						}
 					
+					var temp_days = "";
+					var temp_days_id="";
 					//find each ep
 					$(this).find('episode').each(function(){
+						
+						
 												
 						var epnum = $(this).find('seasonnum').text(),
 						title = $(this).find('title').text(),
@@ -983,13 +1022,34 @@ function tvrageapi_getshowhistory(id){
 						
 						//$("#trse"+epnum).html("<div class='titlehold'>"+epnum+" - "+title+"</div><img src='"+img+"' height='100' width='150' />");
 						$("#trse"+epnum+"A"+season_num).html("<div class='titlehold'>"+text_link+"</div><img src='"+img+"' height='100' width='150' draggable='false' />\r\r Aired - "+airdate);
+						if(totalSeasons==season_num){
+								var totalDaysBetween = daysBetween(airdate);
+								//positive num means aired, negaitve num unaired
+								//alert(totalDaysBetween);
+								if(totalDaysBetween>0){
+									//tempdays unset - first time thru
+									if(temp_days==""){
+								//		alert("here");
+										temp_days = totalDaysBetween;
+										ep_id_div = epnum+"A"+season_num;
+									}
+									//check if new totaldaysbetween is less than current
+									if(totalDaysBetween<temp_days){
+										temp_days = totalDaysBetween;
+										//get current ep id of div and store till out of loop
+										ep_id_div = epnum+"A"+season_num;
+										//alert("made it");
+									}
+									
+								}
+						}
 						
 						
 						
 						tvcount++;
 					});
 					//calculate width in here
-                    tvcount=tvcount*160;
+                    tvcount=tvcount*168;
 					//make latest season the visible one
 					//could have div above with all seasons in, onclick take season num and make current season div display none and new display block
 				
@@ -1002,6 +1062,10 @@ function tvrageapi_getshowhistory(id){
 				$(".tvs:last-child").css("display","block");
 				$(".season_tab_cell:last-child").css("background","#4FA7FF");
 				$("#seasonhold").scrollLeft($("#season_tab").width());
+				//set background of latest ep from total days between loop
+				if(!ep_id_div==""){
+				$("#trse"+ep_id_div).css("background","orange");
+				}
 				
             }
         });
@@ -1018,6 +1082,25 @@ function getshowid(id,name){
 	$("#name").val(name);
 	$("#tvrage_id").val(id);
 	
+}
+
+function daysBetween(airdate) {
+    //alert("ke");
+var first = new Date(airdate);
+var second = new Date();
+    // Copy date parts of the timestamps, discarding the time parts.
+    var one = new Date(first.getFullYear(), first.getMonth(), first.getDate());
+    var two = new Date(second.getFullYear(), second.getMonth(), second.getDate());
+
+    // Do the math.
+    var millisecondsPerDay = 86400000; //1000 * 60 * 60 * 24;
+    //getTime -- milliseconds from 1970
+    var millisBetween = two.getTime() - one.getTime();
+    var days = millisBetween / millisecondsPerDay;
+
+    // Round down.
+    return Math.floor(days);
+    
 }
 
 // JavaScript Document

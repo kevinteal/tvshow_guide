@@ -3,21 +3,34 @@
 
 
 body {
-background:url(background.png) no-repeat;
-background-size: 100%;
+background:url(background/carbon_fibre_big/carbon_fibre_big.png) repeat;
+color:#0CF;
 }
+#topbar{
+	position:absolute;
+	top:0;
+	left:0;
+	height:100px;
+	opacity:0.1;
+	background-color:#CCC;
+	width:100%;
+	
+}
+#topbar img{
+	float:right;}
+
 
 .mylineheight{height:40px;}
 .mylineheight2{height:20px;}
 #subheading{color:#FFF;}
 th,td{padding:5px;}
 tbody{
-	opacity:0.7;
+	opacity:0.9;
 }
 tbody:hover{
 	opacity:1;
-	border:1px black solid;
-	/*background-color:#002D59;*/
+	/*border:1px black solid;
+	background-color:#002D59;*/
 	}
 	tfoot{
 		border-top:#333 1px solid;
@@ -25,6 +38,7 @@ tbody:hover{
 	thead{
 		border-bottom:#333 1px solid;
 		font: bold italic small-caps 16px verdana,sans-serif;
+		color:white;
 	}
 	
 #dialog-link {
@@ -47,6 +61,7 @@ tbody:hover{
 		display:none;
 		width:100%;
 		height:600px;
+		margin-bottom:200px;
 	}
 	#frame_close,#history_close{
 		display:none;
@@ -59,7 +74,7 @@ tbody:hover{
 		color:white;
 	}
 	table a{
-		color:#FF0;
+		color:#0CF;
 		font-family:Tahoma, Geneva, sans-serif;
 		font-size:15px;
 		text-decoration:none;
@@ -70,7 +85,13 @@ tbody:hover{
 	}
 	ul{
 	list-style-image:url(retro_tv_icon_sml.png);
-	
+	}
+	#txthint a{
+		opacity:.8;
+		color:#0CF;
+	}
+	#txthint a:hover{
+		opacity:1;
 	}
 	
 label, input { display:block; }
@@ -103,6 +124,7 @@ button:focus{
 	float:left;
 	width:100%;
 	margin-bottom:5px;
+	
 
 }
 .daybox{
@@ -112,7 +134,7 @@ button:focus{
 	float:left;
 	width:0px;
 	height:20px;
-	color:white;
+	color:#0CF;
 
 	font-size:14px;
 
@@ -217,7 +239,7 @@ button:focus{
 
 
 @media screen and (max-width:1150px){
-	
+	/*
 body{
 	background:url(background/skulls/skulls.png);
 }
@@ -230,7 +252,7 @@ table a{color:#36C;}
 tbody:hover{
 	background:FF8040;
 }
-
+*/
 }
 
 	
