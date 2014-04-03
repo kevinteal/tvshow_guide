@@ -159,16 +159,25 @@ Showname:<input type="text" name="myshow" onKeyUp="showHint(this.value)" placeho
 </div>
 
 <div class="grid_16">
+
+<div id="history_hold" ondrop="drop(event)" ondragover="allowDrop(event)"><p id="history_hold_p">Drag TV Show Here or Click on History...</p>
+<div id="history_wrap">
 <button id="history_close" onClick="close_history()">X</button>
+
 <div id="seasonhold"><div id="season_tab"></div></div>
 <div id="tvrage"></div>
 </div>
+</div>
+</div>
 
 <div class="grid_16">
-<button id="frame_close" onClick="close_frame()">X</button>
+<div id="iframe_holder" ondrop="drop(event)" ondragover="allowDrop(event)" >
+<button id="frame_close" onClick="close_frame()">X</button><p id="iframe_hold_p" >Drag TV Show Here or Click on iframed...</p>
 <iframe id="iframe_url" src=""  ></iframe>
-
 </div>
+</div>
+
+
 </div>
 
 </body>

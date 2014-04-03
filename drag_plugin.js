@@ -24,22 +24,28 @@
 				
 				
 				this.on("mousedown",function(e){
-				console.log("down "+e.pageX);
-				var startx = e.pageX;
-								
+				
+				console.log("START--------------: "+e.pageX);
+				var startx = e.pageX;					
+						
 				selector.on("mousemove",function(e){
 				console.log("moving "+e.pageX);
+					
+						var newx = startx - e.pageX;
 							
-						var newx = startx - e.pageX;	
 						if(newx>0){
 							newx=-settings.speed;
 						}else{
 							newx=settings.speed;
 						}
-						console.log("new x: "+newx);
+						//console.log("new x-------------: "+newx);
 							
 						var scrollx = selector.scrollLeft();
 						selector.scrollLeft(scrollx-newx);			
+						
+						//set the startx to the current x so there is no offset on change of direction
+						startx=e.pageX;
+						
 						});
 				});
 			

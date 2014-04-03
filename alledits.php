@@ -352,10 +352,12 @@ if($ep_no < 10){
 
 $newphrase = str_replace($spaces, $plussign, $show);
 	     
+$g=urlencode($list_link);
+  $g=json_encode($g);
   echo "<tbody>";
   echo "<tr id=$showid >";
   echo "<td><input type='text' id='updname$x' name=$show value=\"$show\" onblur='updateshow($showid,this.value)' $disabled/></td>"; 
-  echo "<td><a target='_blank' href=https://www.google.co.uk/search?q=" . $newphrase . "+s".$snx."e".$enx."+720p+torrent&ie=UTF-8&safe=off&tbs=qdr:w>".$row['showname']."</a></td>";
+  echo "<td><a id='$g' data-tvid='$tvrageapi_id' draggable='true' ondragstart='drag(event)' target='_blank' href=https://www.google.co.uk/search?q=" . $newphrase . "+s".$snx."e".$enx."+720p+torrent&ie=UTF-8&safe=off&tbs=qdr:w>".$row['showname']."</a></td>";
   echo "<td>
   <select id='updateday$x' onchange='updateday(this.value,$showid)' $disabled>
   <option value=$airday>$airday</option>
@@ -368,8 +370,6 @@ $newphrase = str_replace($spaces, $plussign, $show);
   <option value='Saturday'>Saturday</option>
   </select></td>";
   echo "<td><a target='_blank' href=".$list_link.">info</a></td>";
-  $g=urlencode($list_link);
-  $g=json_encode($g);
    echo "<td><a href='#' onclick='updateiframe($g)' >iframed</a></td>";
   echo "<td>".$db_air_date."</td>";
    echo "<td><button type='button' id='es$x' onclick='edit_this_show($showid,\"$newphrase\",$g,$ep_no,$season_no,\"$db_air_date\",\"$airday\")' $disabled >Edit</button></td>";

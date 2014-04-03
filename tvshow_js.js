@@ -678,10 +678,12 @@ else
 function updateiframe(url){
 	console.log(decodeURIComponent(url));
 	url=decodeURIComponent(url);
+	url = url.replace(/"/g, "");
 	var iframe = document.getElementById("iframe_url");
 	document.getElementById("frame_close").style.display="block";
 	iframe.src=url;
 	iframe.style.display="block";
+	$("#iframe_holder").children('p').remove();
 	
 	
 }
@@ -689,6 +691,7 @@ function close_frame(){
 	
 	document.getElementById("iframe_url").style.display="none";
 	document.getElementById("frame_close").style.display="none";
+	$("#iframe_holder").append("<p id='iframe_hold_p'>Drag TV Show Here or Click on iframed...</p>");
 	}
 	
 	function press_enter(e,x){
@@ -934,6 +937,7 @@ function tvrageapi_getshowhistory(id){
 	var tvcount=1,
 	season_count=1,
 	ep_id_div="";
+	$("#history_hold_p").css("display","none");
 	$("#seasonhold").css("display","block");
 	$("#tvrage").css("display","block");
 	$("#history_close").css("display","block");
@@ -1077,6 +1081,7 @@ function close_history(){
 	$("#seasonhold").css("display","none");
 	$("#tvrage").css("display","none");
 	$("#history_close").css("display","none");
+	$("#history_hold_p").css("display","block");
 }
 
 function getshowid(id,name){
@@ -1105,5 +1110,43 @@ var second = new Date();
     return Math.floor(days);
     
 }
+function drag(ev){
+	ev.dataTransfer.setData("text",ev.target.id);
+	ev.dataTransfer.setData("tvrageid",$(ev.target).attr("data-tvid"));
+	
+}
+function drop(ev){
+	ev.preventDefault();
+	console.log($(ev.target));
+	var data = ev.dataTransfer.getData("text");
+	var tvrageid = ev.dataTransfer.getData("tvrageid");
+	
+	var element_over_id = $(ev.target).attr('id');
+	
+	
+	if ( $("#"+element_over_id).parents("#history_hold").length == 1) { 
+		tvrageapi_getshowhistory(tvrageid);
+	}
+	if ( $("#"+element_over_id).parents("#iframe_holder").length == 1 || element_over_id == "iframe_holder" ) { 
+		updateiframe(data);
+	}
+	
+	
+	/*console.log($("#"+element_over_id).parent());
+	
+	if(element_over_id=="season_tab" || element_over_id=="tvrage" || element_over_id=="history_hold_p"){
+		//alert("history");
+		
+	}else if(element_over_id=="iframe_holder" || element_over_id=="iframe_hold_p"){
+		//alert("iframe");
+		
+	}
+	*/
+	
+}
 
+
+function allowDrop(ev){
+	ev.preventDefault();
+}
 // JavaScript Document
