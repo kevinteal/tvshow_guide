@@ -192,7 +192,7 @@ function page_init()
 						document.getElementById("ep_url").style.borderColor="red";
 					}
 				}else{
-					$( this ).dialog( "close" ); 
+					$( t ).dialog( "close" ); 
 					insertshow(name,ep_url,season_number,episode_number,day,tvrage_id);
 				}
 				
@@ -950,7 +950,7 @@ function tvrageapi_getshowhistory(id){
 	 $.ajax({
             type: "GET",
             url: "tvrageapi_history.php?value="+id,
-            cache: false,
+            cache: true,
             dataType: "xml",
             success: function(xml) {
 				
