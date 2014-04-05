@@ -46,7 +46,7 @@ if ($hint == "")
   }
 else
   {
-  $response="<ul>".$hint."</ul>";
+  $response="<ul id='hint_text'>".$hint."</ul>";
   }
 
 //output the response

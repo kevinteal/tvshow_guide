@@ -308,10 +308,10 @@ button:focus{
 	display:none;
 	position:absolute;
 	top:120%;
-	width:100%;
+	width:110%;
 	z-index:999;
 	background-color:#333;
-	border:black solid 2px;
+	border:orange solid 1px;
 }
 .arrow-top {
 	display:none;
@@ -324,7 +324,13 @@ button:focus{
 	border-left: 10px solid transparent; 
 	border-bottom:10px solid orange; 
 }
-
+#hint_text li{
+-webkit-transition: padding-left 0.3s; /* For Safari 3.1 to 6.0 */
+transition: padding-left 0.3s;
+}
+#hint_text li:hover{
+	padding-left:10px;
+}
 
 @media screen and (max-width:1150px){
 	/*
