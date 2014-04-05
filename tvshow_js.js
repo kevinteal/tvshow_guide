@@ -1119,6 +1119,7 @@ function drag(ev){
 	ev.dataTransfer.setData("tvrageid",$(ev.target).attr("data-tvid"));
 	$("#iframe_hold_p").text("DROP!");
 	$("#history_hold_p").text("DROP!");
+	$("#iframe_url").css("z-index",-1);
 	
 }
 function drop(ev){
@@ -1128,7 +1129,7 @@ function drop(ev){
 	var tvrageid = ev.dataTransfer.getData("tvrageid");
 	
 	var element_over_id = $(ev.target).attr('id');
-	
+	console.log(element_over_id);
 	
 	if ( $("#"+element_over_id).parents("#history_hold").length == 1) { 
 		tvrageapi_getshowhistory(tvrageid);
@@ -1140,7 +1141,7 @@ function drop(ev){
 	}
 	$("#iframe_hold_p").text("Drag TV Show Here or Click on iframed...");
 	$("#history_hold_p").text("Drag TV Show Here or Click on History...");
-	
+	$("#iframe_url").css("z-index",1);
 	/*console.log($("#"+element_over_id).parent());
 	
 	if(element_over_id=="season_tab" || element_over_id=="tvrage" || element_over_id=="history_hold_p"){
