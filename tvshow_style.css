@@ -286,6 +286,31 @@ button:focus{
 #showlist_tvrage li:active{
 	background:#ccc;
 }
+#txthint1{
+	width:100%;
+	position:relative;
+}
+#txthint2{
+	padding:15px;
+	display:none;
+	position:absolute;
+	top:120%;
+	width:100%;
+	z-index:999;
+	background-color:#333;
+	border:black solid 2px;
+}
+.arrow-top {
+	display:none;
+	position:absolute;
+	top:100%;
+	left:30%;
+	width: 0; 
+	height: 0; 
+	border-right: 10px solid transparent;
+	border-left: 10px solid transparent; 
+	border-bottom:10px solid orange; 
+}
 
 
 @media screen and (max-width:1150px){

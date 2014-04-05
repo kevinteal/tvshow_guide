@@ -34,9 +34,18 @@
 						var newx = startx - e.pageX;
 							
 						if(newx>0){
+							if(newx>settings.speed){
 							newx=-settings.speed;
-						}else{
+							}else{
+								newx=-newx;
+							}
+						}else if(newx<0){
+							var tx = newx*-1;
+							if(tx>settings.speed){
 							newx=settings.speed;
+							}else{
+								newx=tx;
+							}
 						}
 						//console.log("new x-------------: "+newx);
 							

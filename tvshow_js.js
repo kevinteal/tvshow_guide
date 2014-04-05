@@ -62,11 +62,11 @@ function page_init()
 		);
 		
 		$("#seasonhold").drag_plugin({
-			speed:5
+			speed:15
 			});
 
 		$("#tvrage").drag_plugin({
-			speed:8
+			speed:18
 			});
 /*
 	$("#season_tab").on("mousedown",function(e){
@@ -457,6 +457,8 @@ function showHint(str)
 if (str.length==0)
   { 
   document.getElementById("txtHint").innerHTML="";
+  $("#txthint2").css("display","none");
+  $(".arrow-top").css("display","none");
   return;
   }
 
@@ -465,6 +467,8 @@ xmlhttp.onreadystatechange=function()
   if (xmlhttp.readyState==4 && xmlhttp.status==200)
     {
     document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+	$("#txthint2").css("display","block");
+	$(".arrow-top").css("display","block");
     }
   }
 xmlhttp.open("GET","gethint.php?q="+str,true);
@@ -1113,6 +1117,8 @@ var second = new Date();
 function drag(ev){
 	ev.dataTransfer.setData("text",ev.target.id);
 	ev.dataTransfer.setData("tvrageid",$(ev.target).attr("data-tvid"));
+	$("#iframe_hold_p").text("DROP!");
+	$("#history_hold_p").text("DROP!");
 	
 }
 function drop(ev){
@@ -1126,11 +1132,14 @@ function drop(ev){
 	
 	if ( $("#"+element_over_id).parents("#history_hold").length == 1) { 
 		tvrageapi_getshowhistory(tvrageid);
+		
 	}
 	if ( $("#"+element_over_id).parents("#iframe_holder").length == 1 || element_over_id == "iframe_holder" ) { 
 		updateiframe(data);
+		
 	}
-	
+	$("#iframe_hold_p").text("Drag TV Show Here or Click on iframed...");
+	$("#history_hold_p").text("Drag TV Show Here or Click on History...");
 	
 	/*console.log($("#"+element_over_id).parent());
 	
